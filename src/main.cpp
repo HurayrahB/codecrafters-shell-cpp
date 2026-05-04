@@ -14,8 +14,8 @@ int main() {
     std::string input;
     std::getline(std::cin, input);
 
-    if (input.substr(0, 5) == "echo") {
-      std::cout << input.substr(6) << std::endl;
+    if (input.substr(0, 4) == "echo") {
+      std::cout << input.substr(5) << std::endl;
     } else if (input == "exit") {
       break;
     } else {
