@@ -10,8 +10,8 @@ int main() {
   std::cout << "$ ";
 
   // Captures the user's command in the "command" variable
-  std::string command;
-  std::getline(std::cin, command);
+  std::string input;
+  std::getline(std::cin, input);
 
-  std::cout << command + ": command not found";
+  std::cout << input << ": command not found" << std::endl;
 }
