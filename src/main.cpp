@@ -6,12 +6,16 @@ int main() {
   std::cout << std::unitbuf;
   std::cerr << std::unitbuf;
 
+  bool runREPL = true;
+
+  while (runREPL) {
   // TODO: Uncomment the code below to pass the first stage
-  std::cout << "$ ";
+    std::cout << "$ ";
 
-  // Captures the user's command in the "command" variable
-  std::string input;
-  std::getline(std::cin, input);
+    // Captures the user's command in the "command" variable
+    std::string input;
+    std::getline(std::cin, input);
 
-  std::cout << input << ": command not found" << std::endl;
+    std::cout << input << ": command not found" << std::endl;\
+  }
 }
