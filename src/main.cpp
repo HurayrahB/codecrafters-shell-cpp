@@ -19,13 +19,13 @@ int main() {
 
     if (command == "exit") {
       break;
-    } else if (command == "echo ") {
+    } else if (command == "echo") {
       std::string word;
       while (ss >> word) {
         std::cout << word << " ";
       }
       std::cout << std::endl;
-    } else if (command == "type ") {
+    } else if (command == "type") {
       bool found = false;
 
       std::string builtin[3] = {"echo", "type", "exit"};
@@ -34,7 +34,7 @@ int main() {
 
       for (int i{0}; i <= builtin->length(); i++) {
         if (builtin[i] == command_to_know) {
-          std::cout << command_to_know << "is a shell builtin\n";
+          std::cout << command_to_know << " is a shell builtin\n";
           found = true;
         }
       }
@@ -53,7 +53,6 @@ int main() {
           }
         }
       }
-
       if (!found) {
         std::cout << command_to_know << ": not found\n";
       }
