@@ -1,34 +1,61 @@
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <unistd.h>
 
 int main() {
   // Flush after every std::cout / std:cerr
   std::cout << std::unitbuf;
   std::cerr << std::unitbuf;
 
+  std::string line;
+  std::string command;
+
   while (true) {
-  // TODO: Uncomment the code below to pass the first stage
     std::cout << "$ ";
+    std::getline(std::cin, line);
+    std::stringstream ss(line);
+    ss >> command;
 
-    // Captures the user's command in the "command" variable
-    std::string input;
-    std::getline(std::cin, input);
-
-     if (input == "exit") {
+    if (command == "exit") {
       break;
-    } else if (input.substr(0, 5) == "type ") {
-      std::string cmdInput = input.substr(5);
-
-      if (cmdInput == "echo" || cmdInput == "exit" || cmdInput == "type") {
-        std::cout << cmdInput << " is a shell builtin" << std::endl;
-      } else {
-        std::cout << cmdInput << ": not found" << std::endl;
+    } else if (command == "echo ") {
+      std::string word;
+      while (ss >> word) {
+        std::cout << word << " ";
       }
-      
-    } else if (input.substr(0, 5) == "echo ") {
-      std::cout << input.substr(5) << std::endl;
-    } else {
-      std::cout << input << ": command not found" << std::endl;\
-    }
+      std::cout << std::endl;
+    } else if (command == "type ") {
+      bool found = false;
+
+      std::string builtin[3] = {"echo", "type", "exit"};
+      std::string command_to_know;
+      ss >> command_to_know;
+
+      for (int i{0}; i <= builtin->length(); i++) {
+        if (builtin[i] == command_to_know) {
+          std::cout << command_to_know << "is a shell builtin\n";
+          found = true;
+        }
+      }
+
+      if (!found) {
+        std::string path_env = std::getenv("PATH");
+        std::stringstream ss_path(path_env);
+        std::string path;
+
+        while (std::getline(ss_path, path, ':')) {
+          std::string full_path = path + '/' + command_to_know;
+          if (access(full_path.c_str(), X_OK) == 0) {
+            std::cout << command_to_know << " is " << full_path << std::endl;
+            found = true;
+            break;
+          }
+        }
+      }
+
+      if (!found) {
+        std::cout << command_to_know << ": not found\n";
+      }
   }
 }
