@@ -56,6 +56,8 @@ int main() {
       if (!found) {
         std::cout << command_to_know << ": not found\n";
       }
+    } else {
+        std::cout << command << ": not found\n";
     }
   }
 }
