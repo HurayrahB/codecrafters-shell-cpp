@@ -14,7 +14,9 @@ int main() {
     std::string input;
     std::getline(std::cin, input);
 
-    if (input.substr(0, 5) == "type ") {
+     if (input == "exit") {
+      break;
+    } else if (input.substr(0, 5) == "type ") {
       std::string cmdInput = input.substr(5);
 
       if (cmdInput == "echo" || cmdInput == "exit" || cmdInput == "type") {
@@ -22,10 +24,7 @@ int main() {
       } else {
         std::cout << cmdInput << ": not found" << std::endl;
       }
-    }
-
-    if (input == "exit") {
-      break;
+      
     } else if (input.substr(0, 5) == "echo ") {
       std::cout << input.substr(5) << std::endl;
     } else {
