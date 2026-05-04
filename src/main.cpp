@@ -6,9 +6,7 @@ int main() {
   std::cout << std::unitbuf;
   std::cerr << std::unitbuf;
 
-  bool runREPL = true;
-
-  while (runREPL) {
+  while (true) {
   // TODO: Uncomment the code below to pass the first stage
     std::cout << "$ ";
 
@@ -16,6 +14,10 @@ int main() {
     std::string input;
     std::getline(std::cin, input);
 
-    std::cout << input << ": command not found" << std::endl;\
+    if (input == "exit") {
+      break;
+    } else {
+      std::cout << input << ": command not found" << std::endl;\
+    }
   }
 }
